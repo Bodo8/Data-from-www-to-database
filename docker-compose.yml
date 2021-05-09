@@ -1,8 +1,6 @@
 
 version: "3.7"
 services:
-
-
   #Laravel App
   app:
     build:
@@ -11,40 +9,44 @@ services:
         uid: 8888
       context: ./
       dockerfile: Dockerfile
-    image: laravel-app
+    image: parser-app
     restart: unless-stopped
     working_dir: /var/www/
     volumes:
       - ./:/var/www
+    networks:
+      - parser
 
-
-  #Nginx Service
+    #Nginx Service
   nginx:
     image: nginx:alpine
+    container_name: parser-nginx
     restart: unless-stopped
     ports:
       - 8000:80
     volumes:
       - ./:/var/www
-      - ./nginx/conf.d:/etc/nginx/conf.d/
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - parser
 
   #Mysl Service
   db:
-    image: mysql:8
+    image: mysql:5.7
+    container_name: parser-db
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_USER: ${DB_USERNAME}
-
-  #web
-  web:
-    image: laravel-app
-    ports:
-      - 8000:8000
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
     volumes:
-      - ./:/app
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - parser
 
-
-
+networks:
+  parser:
+    driver: bridge
