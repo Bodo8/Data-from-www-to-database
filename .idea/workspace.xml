@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdc645a5-6d5d-4334-bff7-5ef19b368959" name="Default Changelist" comment="" />
+    <list default="true" id="cdc645a5-6d5d-4334-bff7-5ef19b368959" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,6 +31,14 @@
     </option>
     <expand />
     <select />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Laravel8_Php74_docker_clear" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.4">
     <include_path>
@@ -145,11 +158,17 @@
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.jetbrains.php.phpunit.codeGeneration.PhpNewTestDialog.defaultLibrary" value="PHPUnit 6+" />
-    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests/Unit" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests/Unit" />
+      <recent name="$PROJECT_DIR$/app/Http/Controllers" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -191,6 +210,8 @@
         <item itemvalue="PHPUnit.MalikControllerTest.test_get_data" />
         <item itemvalue="PHPUnit.ExampleTest.test_example (1)" />
         <item itemvalue="PHPUnit.ExampleTest.test_example" />
+        <item itemvalue="PHPUnit.MalikControllerTest.test_get_data" />
+        <item itemvalue="PHPUnit.ExampleTest.test_example (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -223,11 +244,27 @@
       <workItem from="1620306725814" duration="1744000" />
       <workItem from="1620319801919" duration="14579000" />
       <workItem from="1620381623274" duration="5147000" />
+      <workItem from="1620481401103" duration="618000" />
+      <workItem from="1620491218146" duration="6495000" />
+      <workItem from="1620565842562" duration="6464000" />
+      <workItem from="1620579611339" duration="248000" />
     </task>
+    <task id="LOCAL-00001" summary="Improved project setup">
+      <created>1620579137677</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1620579137677</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Improved project setup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improved project setup" />
   </component>
   <component name="WindowStateProjectService">
     <state x="466" y="171" width="674" height="780" key="#ExampleTest.test_example" timestamp="1620282075588">
@@ -246,10 +283,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="239" y="175" width="800" height="672" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1620319877649" />
-    <state x="396" y="225" width="881" height="672" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1620323245833">
+    <state x="396" y="225" width="881" height="672" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1620555298123">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="396" y="225" width="881" height="672" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1620323245833" />
+    <state x="396" y="225" width="881" height="672" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1620555298123" />
+    <state x="246" y="112" width="843" height="798" key="CommitChangelistDialog2" timestamp="1620579892058">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="246" y="112" width="843" height="798" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1620579892058" />
     <state width="1206" height="239" key="GridCell.Tab.0.bottom" timestamp="1620366084866">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -270,13 +311,25 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="281" y="333" width="716" height="356" key="NewPhpClassDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1620326364908" />
-    <state x="305" y="198" key="SettingsEditor" timestamp="1620326662519">
+    <state x="305" y="198" key="SettingsEditor" timestamp="1620578987246">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="305" y="198" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1620326662519" />
+    <state x="305" y="198" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1620578987246" />
+    <state x="268" y="249" width="800" height="523" key="Vcs.Push.Dialog.v2" timestamp="1620579181882">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="268" y="249" width="800" height="523" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1620579181882" />
     <state x="265" y="150" width="866" height="722" key="com.jetbrains.php.test.PhpNewTestDialog" timestamp="1620364595520">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="265" y="150" width="866" height="722" key="com.jetbrains.php.test.PhpNewTestDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1620364595520" />
+    <state x="349" y="117" width="647" height="792" key="find.popup" timestamp="1620566103695">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="349" y="117" width="647" height="792" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1620566103695" />
+    <state x="377" y="308" width="591" height="406" key="git4idea.merge.GitMergeDialog" timestamp="1620579783024">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="377" y="308" width="591" height="406" key="git4idea.merge.GitMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1620579783023" />
   </component>
 </project>
