@@ -30,4 +30,7 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'malikShop' => [
+        'url' => 'https://zabawki-malik.pl/happy-people,187,0.html'
+    ],
 ];
