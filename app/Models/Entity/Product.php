@@ -28,6 +28,16 @@ class Product
         $this->availability = $availability;
     }
 
+    public static function getAvailabilityDescription()
+    {
+        return [
+            self::AVAILABILITY_WELL => _('dużo'),
+            self::AVAILABILITY_MEDIUM =>  _('średnio'),
+            self::AVAILABILITY_LITTLE => _('mało'),
+            self::AVAILABILITY_LESS_THAN_5 => _('mniej niż 5')
+        ];
+    }
+
     /**
      * @return string
      */
@@ -50,15 +60,5 @@ class Product
     public function getAvailability(): string
     {
         return $this->availability;
-    }
-
-    public static function getAvailabilityDescription()
-    {
-        return [
-            self::AVAILABILITY_WELL => _('dużo'),
-            self::AVAILABILITY_MEDIUM =>  _('średnio'),
-            self::AVAILABILITY_LITTLE => _('mało'),
-            self::AVAILABILITY_LESS_THAN_5 => _('mniej niż 5')
-        ];
     }
 }
