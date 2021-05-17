@@ -16,18 +16,18 @@ use Illuminate\Routing\Controller as BaseController;
 class ParserController extends BaseController
 {
     private UrlServiceProvider $urlServiceProvider;
-    private ParserServiceProvider $ParserServiceProvider;
+    private ParserServiceProvider $parserServiceProvider;
 
     /**
      *  constructor.
      */
     public function __construct(
         UrlServiceProvider $urlServiceProvider,
-        ParserServiceProvider $ParserServiceProvider
+        ParserServiceProvider $parserServiceProvider
     )
     {
         $this->urlServiceProvider = $urlServiceProvider;
-        $this->ParserServiceProvider = $ParserServiceProvider;
+        $this->parserServiceProvider = $parserServiceProvider;
     }
 
     /**
@@ -62,43 +62,7 @@ class ParserController extends BaseController
         $dom->preserveWhiteSpace = false;
         $dom->recover = true;
         $dom->loadHtml(htmlentities($result));
-        $this->saveToDataBase($dom);
-
+        $this->parserServiceProvider->saveToDataBase($dom);
         return $dom;
-    }
-
-    private function saveToDataBase(\DOMDocument $dom)
-    {
-        $body = $dom->getElementsByTagName('body');
-        $innerBody = $this->extractDomElements($body);
-
-
-
-    }
-
-
-
-    private function getEmptyDomDocument(): DOMDocument
-    {
-        $dom = new DOMDocument('1.0', 'UTF-8');
-        $dom->validateOnParse = true;
-        $dom->preserveWhiteSpace = false;
-        $dom->recover = true;
-
-        return $dom;
-    }
-
-    /**
-     * @param \DOMNodeList $body
-     * @return string
-     */
-    private function extractDomElements(\DOMNodeList $body): string
-    {
-        $items = $body->item(0);
-        $children = $items->childNodes;
-        $bodyHtml = $children->item(0);
-        $bodyHtml->C14NFile('storage/app/public/body.txt');
-
-        return htmlspecialchars_decode($bodyHtml->C14N());
     }
 }
