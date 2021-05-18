@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Providers\ParserServiceProvider;
 use App\Providers\UrlServiceProvider;
 use DOMDocument;
 use Exception;
@@ -15,13 +16,18 @@ use Illuminate\Routing\Controller as BaseController;
 class ParserController extends BaseController
 {
     private UrlServiceProvider $urlServiceProvider;
+    private ParserServiceProvider $parserServiceProvider;
 
     /**
      *  constructor.
      */
-    public function __construct(UrlServiceProvider $urlServiceProvider)
+    public function __construct(
+        UrlServiceProvider $urlServiceProvider,
+        ParserServiceProvider $parserServiceProvider
+    )
     {
         $this->urlServiceProvider = $urlServiceProvider;
+        $this->parserServiceProvider = $parserServiceProvider;
     }
 
     /**
@@ -52,10 +58,11 @@ class ParserController extends BaseController
         }
 
         $dom = new DOMDocument('1.0', 'UTF-8');
+        $dom->validateOnParse = true;
         $dom->preserveWhiteSpace = false;
         $dom->recover = true;
-        $dom->loadHtml(htmlspecialchars($result));
-
+        $dom->loadHtml(htmlentities($result));
+        $this->parserServiceProvider->saveToDataBase($dom);
         return $dom;
     }
 }

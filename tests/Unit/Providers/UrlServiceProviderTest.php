@@ -19,7 +19,7 @@ class UrlServiceProviderTest extends TestCase
         $url = $urlProvider->getUrlFromConfig();
 
         $this->assertEquals(
-            "https://zabawki-malik.pl/happy-people,187,0.html", $url
+            'https://zabawki-malik.pl/happy-people,187,0.html', $url
         );
     }
 }
