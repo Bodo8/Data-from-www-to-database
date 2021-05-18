@@ -72,10 +72,7 @@ class ParserController extends BaseController
         $body = $dom->getElementsByTagName('body');
         $innerBody = $this->extractDomElements($body);
 
-
-
     }
-
 
 
     private function getEmptyDomDocument(): DOMDocument
@@ -97,7 +94,6 @@ class ParserController extends BaseController
         $items = $body->item(0);
         $children = $items->childNodes;
         $bodyHtml = $children->item(0);
-        $bodyHtml->C14NFile('storage/app/public/body.txt');
 
         return htmlspecialchars_decode($bodyHtml->C14N());
     }

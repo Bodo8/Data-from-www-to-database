@@ -29,14 +29,14 @@ class ParserControllerTest extends TestCase
 
     public function test_get_data_wrong_url()
     {
-//        $provider = $this->createMock(UrlServiceProvider::class);
-//        $parserProvider = $this->createMock(ParserServiceProvider::class);
-//        $parserController = new ParserController($provider, $parserProvider);
-//        $provider->method('getUrlFromConfig')
-//            ->willReturn('https: wrong address url');
-//
-//        $this->expectExceptionMessage('wrong url or check network connection');
-//        $parserController->getData();
+        $provider = $this->createMock(UrlServiceProvider::class);
+        $parserProvider = $this->createMock(ParserServiceProvider::class);
+        $parserController = new ParserController($provider, $parserProvider);
+        $provider->method('getUrlFromConfig')
+            ->willReturn('https: wrong address url');
+
+        $this->expectExceptionMessage('wrong url or check network connection');
+        $parserController->getData();
     }
 
     protected function tearDown(): void
