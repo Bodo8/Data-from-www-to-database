@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Providers\ParserServiceProvider;
 use App\Providers\UrlServiceProvider;
 use DOMDocument;
+use DOMNode;
 use Exception;
 use Illuminate\Routing\Controller as BaseController;
 
@@ -15,6 +16,8 @@ use Illuminate\Routing\Controller as BaseController;
  */
 class ParserController extends BaseController
 {
+    private const BODY_DOM_ELEMENT = 'body';
+
     private UrlServiceProvider $urlServiceProvider;
     private ParserServiceProvider $parserServiceProvider;
 
@@ -32,10 +35,10 @@ class ParserController extends BaseController
 
     /**
      * Akcja pobierania kodu Html ze strony wwww.
-     * @return DOMDocument
+     * @return DOMNode
      * @throws Exception
      */
-    public function getData(): DOMDocument
+    public function getData(): DOMNode
     {
         $url = $this->urlServiceProvider->getUrlFromConfig();
 
@@ -62,7 +65,44 @@ class ParserController extends BaseController
         $dom->preserveWhiteSpace = false;
         $dom->recover = true;
         $dom->loadHtml(htmlentities($result));
-        $this->parserServiceProvider->saveToDataBase($dom);
-        return $dom;
+        $bodyHtml = $this->extractDomElementsBody($dom);
+        $innerBodyString = $this->convertBodyToString($bodyHtml);
+        $this->parserServiceProvider->parseHtmlCode($innerBodyString);
+
+        return $bodyHtml;
+    }
+
+    /**
+     * @param DOMDocument $dom
+     * @return DOMNode
+     * @throws Exception
+     */
+    private function extractDomElementsBody(DOMDocument $dom): DOMNode
+    {
+        $body = $dom->getElementsByTagName(self::BODY_DOM_ELEMENT);
+        $items = $body->item(0);
+        $children = $items->childNodes;
+        $innerBodyString = $children->item(0);
+        if ($innerBodyString == null) {
+            throw new Exception('DomElement "body" no exist on the website' );
+        }
+
+        return $innerBodyString;
+    }
+
+    /**
+     * @param DOMNode $bodyHtml
+     * @return string
+     * @throws Exception
+     */
+    public function convertBodyToString(DOMNode $bodyHtml): string
+    {
+        $innerBody = htmlspecialchars_decode($bodyHtml->C14N());
+
+        if (strlen($innerBody) < 1) {
+            throw new Exception('check DomElements on the website');
+        }
+
+        return $innerBody;
     }
 }

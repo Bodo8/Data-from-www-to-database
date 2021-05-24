@@ -6,6 +6,7 @@ namespace Tests\Unit\Http\Controllers;
 use App\Http\Controllers\ParserController;
 use App\Providers\ParserServiceProvider;
 use App\Providers\UrlServiceProvider;
+use DOMNode;
 use Illuminate\Foundation\Testing\TestCase;
 use Tests\CreatesApplication;
 
@@ -20,11 +21,11 @@ class ParserControllerTest extends TestCase
     public function test_get_data()
     {
         $provider = new UrlServiceProvider();
-        $parserProvider = new ParserServiceProvider();
+        $parserProvider = $this->createMock(ParserServiceProvider::class);
         $parserController = new ParserController($provider, $parserProvider);
         $data = $parserController->getData();
 
-       $this->assertInstanceOf(\DOMDocument::class, $data);
+       $this->assertInstanceOf(DOMNode::class, $data);
     }
 
     public function test_get_data_wrong_url()
