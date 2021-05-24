@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Http\Controllers\ParserController;
+use App\Providers\ParserService\ParserMainService;
 
 /**
  * Class ParserServiceProvider
@@ -11,22 +11,19 @@ use App\Http\Controllers\ParserController;
  */
 class ParserServiceProvider
 {
+    private ParserMainService $parserMainService;
 
-    public function saveToDataBase(\DOMDocument $dom)
+    public function __construct()
     {
-        print_r($dom);
-        $form = $dom->getElementsByTagName('form');
-        // print_r($form);
-        $items = $form->item(0);
-        $innerHTML = '';
-        $children = $items->childNodes;
+        $this->parserMainService = new ParserMainService();
+    }
 
-        foreach ($children as $child) {
-           $innerHTML .= $child->ownerDocument->saveHTML($child);
+    /**
+     * @param string $innerBody
+     */
+    public function parseHtmlCode(string $innerBody): void
+    {
+        $cleanHtmlString = $this->parserMainService->cleanHtmlStringsFromBadTags($innerBody);
 
-        }
-
-         var_dump($innerHTML);
-        return $innerHTML;
     }
 }
