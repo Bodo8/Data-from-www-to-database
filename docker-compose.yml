@@ -6,7 +6,7 @@ services:
     build:
       args:
         user: boguslaw
-        uid: 8888
+        uid: 1000
       context: ./
       dockerfile: Dockerfile
     image: parser-app
@@ -31,19 +31,43 @@ services:
       - parser
 
   #Mysl Service
-  db:
-    image: mysql:5.7
-    container_name: parser-db
+  mysql:
+    image: mysql:8
+    container_name: parser-mysql
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_DATABASE: parser
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_PASSWORD: password
+      MYSQL_USER: parser
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
       - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - parser
+
+  redis:
+    image: redis:6.2.1-buster
+    container_name: redis
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ./redis/data:/data
+    networks:
+      - parser
+
+  phpmyadmin:
+    image: phpmyadmin:5.1.0-apache
+    container_name: phpmyadmin
+    restart: unless-stopped
+    ports:
+      - 8200:80
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: parser
+      PMA_PASSWORD: password
     networks:
       - parser
 

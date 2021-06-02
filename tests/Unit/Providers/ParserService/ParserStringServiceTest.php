@@ -6,6 +6,7 @@ namespace Tests\Unit\Providers\ParserService;
 use App\Providers\ParserService\ParserStringService;
 use PHPUnit\Framework\TestCase;
 use Tests\Unit\Models\MotherObject\StringsHtmlProvider;
+use function var_dump;
 
 /**
  * Class ParserStringServiceTest
