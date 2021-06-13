@@ -11,10 +11,11 @@ use App\Models\Entity\Product;
  */
 final class ProductMother
 {
-    public static function getOneByName(string $name): Product
+    public static function getOne(): Product
     {
         return new Product(
-            $name,
+            1,
+            'product example',
             25,
             Product::AVAILABILITY_LESS_THAN_5
 

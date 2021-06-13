@@ -17,7 +17,7 @@ class ProductRepositoryTest extends TestCase
     public function test_add_new_product()
     {
         $repository = new ProductRepository();
-        $product = ProductMother::getOneByName('zabawka');
+        $product = ProductMother::getOne();
         $actual = $repository->add($product);
 
         $this->assertEquals($product, $actual);
@@ -26,9 +26,9 @@ class ProductRepositoryTest extends TestCase
     public function test_get_product()
     {
         $repository = new ProductRepository();
-        $product = ProductMother::getOneByName('zabawka');
+        $product = ProductMother::getOne();
         $repository->add($product);
-        $actual = $repository->getOneByName($product->getName());
+        $actual = $repository->getOne($product->getId());
 
         $this->assertEquals($product, $actual);
     }
@@ -38,6 +38,6 @@ class ProductRepositoryTest extends TestCase
         $repository = new ProductRepository();
 
         $this->expectException(ProductNotFoundException::class);
-        $repository->getOneByName('zabawka');
+        $repository->getOne(100);
     }
 }

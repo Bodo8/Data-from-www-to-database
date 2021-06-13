@@ -47,15 +47,15 @@ services:
     networks:
       - parser
 
-  redis:
-    image: redis:6.2.1-buster
-    container_name: redis
-    restart: unless-stopped
-    tty: true
-    volumes:
-      - ./redis/data:/data
-    networks:
-      - parser
+#  redis:
+#    image: redis:6.2.1-buster
+#    container_name: redis
+#    restart: unless-stopped
+#    tty: true
+#    volumes:
+#      - ./redis/data:/data
+#    networks:
+#      - parser
 
   phpmyadmin:
     image: phpmyadmin:5.1.0-apache

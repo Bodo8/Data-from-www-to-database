@@ -15,7 +15,7 @@ class ProductTest extends TestCase
 {
     public function test_instance_product()
     {
-        $product = ProductMother::getOneByName('zabawka');
+        $product = ProductMother::getOne();
 
         $this->assertInstanceOf(Product::class, $product);
     }
