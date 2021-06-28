@@ -11,7 +11,7 @@ use App\Exceptions\Interfaces\NotFoundExceptionInterface;
  */
 class ProductNotFoundException extends \DomainException implements NotFoundExceptionInterface
 {
-    public static function createFromName(int $idProduct) : self
+    public static function createFromId(int $idProduct) : self
     {
         return new self(
             sprintf('Product with given ID %s not exists', $idProduct)

@@ -3,22 +3,25 @@ declare(strict_types=1);
 
 namespace App\Models\Repository\Infrastructure\InEloquent;
 
+use App\Exceptions\ProductNotFoundException;
 use App\Models\Entity\Product;
 use App\Models\Repository\Infrastructure\DAO\ProductDAO;
+use App\Models\Repository\Interfaces\ProductRepositoryInterface;
 
 /**
  * Class ProductRepository
  * @author Bogusław Trojański
  */
-class ProductRepository implements Product\ProductRepositoryInterface
+class ProductRepository implements ProductRepositoryInterface
 {
     /**
      * Pobranie jednego produktu
      */
     public function getOne(int $idProduct): Product
     {
-        $productDao =  ProductDAO::findOrFail($idProduct);
-        $product = $this->convertDaoToObject($productDao);
+        $productDAO =  ProductDAO::find($idProduct);
+        $this->checkIfExists($productDAO, $idProduct);
+        $product = $this->convertDAOToObject($productDAO);
 
         return $product;
     }
@@ -32,7 +35,6 @@ class ProductRepository implements Product\ProductRepositoryInterface
         $productDAO->name = $product->getName();
         $productDAO->price = $product->getPrice();
         $productDAO->availability = $product->getAvailability();
-
         $productDAO->save();
         $insertedId = $productDAO->id_product;
         $product->setIdProduct($insertedId);
@@ -45,7 +47,8 @@ class ProductRepository implements Product\ProductRepositoryInterface
      */
     public function remove(Product $product): void
     {
-        $productDAO = ProductDAO::findOrFail($product->getId());
+        $productDAO = ProductDAO::find($product->getId());
+        $this->checkIfExists($productDAO, $product->getId());
         $productDAO->delete();
     }
 
@@ -54,20 +57,32 @@ class ProductRepository implements Product\ProductRepositoryInterface
      */
     public function update(Product $product): void
     {
-        $productDAO = ProductDAO::findOrFail($product->getId());
+        $productDAO = ProductDAO::find($product->getId());
+        $this->checkIfExists($productDAO, $product->getId());
         $productDAO->name = $product->getName();
         $productDAO->price = $product->getPrice();
         $productDAO->availability = $product->getAvailability();
         $productDAO->save();
     }
 
-    private function convertDaoToObject(\Illuminate\Database\Eloquent\Model $productDao): Product
+    private function convertDAOToObject(\Illuminate\Database\Eloquent\Model $productDAO): Product
     {
         return new Product(
-            $productDao->id_product,
-            $productDao->name,
-            $productDao->price,
-            $productDao->availability
+            $productDAO->id_product,
+            $productDAO->name,
+            $productDAO->price,
+            $productDAO->availability
         );
+    }
+
+    /**
+     * @param int $idProduct
+     * @param $productDAO
+     */
+    private function checkIfExists($productDAO, int $idProduct): void
+    {
+        if (null == $productDAO) {
+            throw ProductNotFoundException::createFromId($idProduct);
+        }
     }
 }

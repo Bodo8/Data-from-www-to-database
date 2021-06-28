@@ -95,6 +95,6 @@ class ParserStringService
      */
     public function changeStringHtmlToArray(string $innerBody): array
     {
-        return str_word_count($innerBody,1, '></ =0123456789');
+        return str_word_count($innerBody,1, '></ =0123456789",.:;');
     }
 }

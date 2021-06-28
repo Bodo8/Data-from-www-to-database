@@ -5,7 +5,7 @@ namespace Tests\Unit\Models\Entity;
 
 use App\Models\Entity\Product;
 use PHPUnit\Framework\TestCase;
-use Tests\Unit\Models\MotherObject\ProductMother;
+use Tests\MotherObject\ProductMother;
 
 /**
  * Class ProductTest

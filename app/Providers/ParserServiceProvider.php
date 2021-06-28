@@ -23,7 +23,7 @@ class ParserServiceProvider
      */
     public function parseHtmlCode(string $innerBody): void
     {
-        $cleanHtmlString = $this->parserMainService->cleanHtmlStringsFromBadTags($innerBody);
+        $cleanHtmlArray = $this->parserMainService->cleanHtmlStringsFromBadTags($innerBody);
 
     }
 }

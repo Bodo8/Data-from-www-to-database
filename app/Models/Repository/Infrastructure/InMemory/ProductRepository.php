@@ -21,7 +21,7 @@ class ProductRepository implements ProductRepositoryInterface
         if (isset($this->repository[$idProduct])) {
             return $this->repository[$idProduct];
         }
-        throw ProductNotFoundException::createFromName($idProduct);
+        throw ProductNotFoundException::createFromId($idProduct);
     }
 
     public function add(Product $product): Product
@@ -37,5 +37,23 @@ class ProductRepository implements ProductRepositoryInterface
 
         $this->repository[$this->repositoryId] = $created;
         return $created;
+    }
+
+    public function update(Product $product): void
+    {
+        if (isset($this->repository[$product->getId()])){
+            $this->repository[$product->getId()] = $product;
+        } else {
+            throw ProductNotFoundException::createFromId($product->getId());
+        }
+    }
+
+    public function remove(Product $product): void
+    {
+        if (isset($this->repository[$product->getId()])){
+            unset($this->repository[$product->getId()]);
+        } else {
+            throw ProductNotFoundException::createFromId($product->getId());
+        }
     }
 }

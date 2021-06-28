@@ -14,7 +14,7 @@ class ParserMainService
 
     private const BAD_TAGS = [
         'SCRIPT' =>
-                  ['BEGINNING' => '<script>',
+                  ['BEGINNING' => '<script',
                   'END' => '</script>'],
         'LINK' => ['BEGINNING' => '<link',
                   'END' => '>'],

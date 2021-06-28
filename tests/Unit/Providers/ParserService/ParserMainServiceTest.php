@@ -18,13 +18,6 @@ use function var_dump;
  */
 class ParserMainServiceTest extends TestCase
 {
-    private MockObject $parserMainService;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->parserMainService = $this->createMock(ParserMainService::class);
-    }
 
     public function test_clean_html_string()
     {
