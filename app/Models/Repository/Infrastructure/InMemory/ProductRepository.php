@@ -14,19 +14,46 @@ use App\Models\Repository\Interfaces\ProductRepositoryInterface;
 class ProductRepository implements ProductRepositoryInterface
 {
     private $repository = [];
+    private $repositoryId = 0;
 
-    public function getOneByName(string $productName): Product
+    public function getOne(int $idProduct): Product
     {
-        if (isset($this->repository[$productName])) {
-            return $this->repository[$productName];
+        if (isset($this->repository[$idProduct])) {
+            return $this->repository[$idProduct];
         }
-        throw ProductNotFoundException::createFromName($productName);
+        throw ProductNotFoundException::createFromId($idProduct);
     }
 
     public function add(Product $product): Product
     {
-        $this->repository[$product->getName()] = $product;
+        $this->repositoryId++;
 
-        return $product;
+        $created = new Product(
+            $this->repositoryId,
+            $product->getName(),
+            $product->getPrice(),
+            $product->getAvailability()
+        );
+
+        $this->repository[$this->repositoryId] = $created;
+        return $created;
+    }
+
+    public function update(Product $product): void
+    {
+        if (isset($this->repository[$product->getId()])){
+            $this->repository[$product->getId()] = $product;
+        } else {
+            throw ProductNotFoundException::createFromId($product->getId());
+        }
+    }
+
+    public function remove(Product $product): void
+    {
+        if (isset($this->repository[$product->getId()])){
+            unset($this->repository[$product->getId()]);
+        } else {
+            throw ProductNotFoundException::createFromId($product->getId());
+        }
     }
 }

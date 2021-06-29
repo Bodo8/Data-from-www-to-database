@@ -6,7 +6,7 @@ namespace Tests\Unit\Models\Repository\Infrastructure\InMemory;
 use App\Exceptions\ProductNotFoundException;
 use App\Models\Repository\Infrastructure\InMemory\ProductRepository;
 use PHPUnit\Framework\TestCase;
-use Tests\Unit\Models\MotherObject\ProductMother;
+use Tests\MotherObject\ProductMother;
 
 /**
  * Class ProductRepositoryTest
@@ -14,30 +14,79 @@ use Tests\Unit\Models\MotherObject\ProductMother;
  */
 class ProductRepositoryTest extends TestCase
 {
+    private ProductRepository $repository;
+
+    protected function setUp(): void
+    {
+        $this->repository = new ProductRepository();
+
+        parent::setUp();
+    }
+
     public function test_add_new_product()
     {
-        $repository = new ProductRepository();
-        $product = ProductMother::getOneByName('zabawka');
-        $actual = $repository->add($product);
+        $product = ProductMother::getOne();
+        $actual = $this->repository->add($product);
 
-        $this->assertEquals($product, $actual);
+        $this->assertProduct($product, $actual);
     }
 
     public function test_get_product()
     {
-        $repository = new ProductRepository();
-        $product = ProductMother::getOneByName('zabawka');
-        $repository->add($product);
-        $actual = $repository->getOneByName($product->getName());
+        $product = ProductMother::getOne();
+        $product = $this->repository->add($product);
+        $actual = $this->repository->getOne($product->getId());
 
-        $this->assertEquals($product, $actual);
+        $this->assertProduct($product, $actual);
     }
 
     public function test_get_unknown_product()
     {
-        $repository = new ProductRepository();
+        $this->expectException(ProductNotFoundException::class);
+        $this->repository->getOne(100);
+    }
+
+    public function test_delete_product()
+    {
+        $product = ProductMother::getOne();
+        $product = $this->repository->add($product);
+        $id = $product->getId();
+        $this->repository->remove($product);
 
         $this->expectException(ProductNotFoundException::class);
-        $repository->getOneByName('zabawka');
+        $this->repository->getOne($id);
+    }
+
+    public function test_update_product()
+    {
+        $product = ProductMother::getOne();
+        $product = $this->repository->add($product);
+        $update = ProductMother::getDifferentProduct();
+        $update->setIdProduct($product->getId());
+        $this->repository->update($update);
+        $actual = $this->repository->getOne($product->getId());
+
+        $this->assertProduct($update, $actual);
+        $this->assertEquals($product->getId(), $actual->getId());
+    }
+
+    public function test_set_wrong_id_product_is_impossible()
+    {
+        $product = ProductMother::getOne();
+        $product = $this->repository->add($product);
+        $actual = $this->repository->getOne($product->getId());
+        $actual->setIdProduct(345);
+        $this->assertEquals($product->getId(), $actual->getId());
+    }
+
+    /**
+     * @param \App\Models\Entity\Product $product
+     * @param \App\Models\Entity\Product $actual
+     */
+    private function assertProduct(\App\Models\Entity\Product $product, \App\Models\Entity\Product $actual): void
+    {
+        $this->assertEquals($product->getName(), $actual->getName());
+        $this->assertEquals($product->getPrice(), $actual->getPrice());
+        $this->assertEquals($product->getAvailability(), $actual->getAvailability());
     }
 }

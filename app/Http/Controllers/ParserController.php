@@ -9,6 +9,7 @@ use DOMDocument;
 use DOMNode;
 use Exception;
 use Illuminate\Routing\Controller as BaseController;
+use function var_dump;
 
 /**
  * Class ParserController
@@ -95,7 +96,7 @@ class ParserController extends BaseController
      * @return string
      * @throws Exception
      */
-    public function convertBodyToString(DOMNode $bodyHtml): string
+    private function convertBodyToString(DOMNode $bodyHtml): string
     {
         $innerBody = htmlspecialchars_decode($bodyHtml->C14N());
 

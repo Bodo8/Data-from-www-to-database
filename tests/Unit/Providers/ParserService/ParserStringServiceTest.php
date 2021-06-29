@@ -6,6 +6,7 @@ namespace Tests\Unit\Providers\ParserService;
 use App\Providers\ParserService\ParserStringService;
 use PHPUnit\Framework\TestCase;
 use Tests\Unit\Models\MotherObject\StringsHtmlProvider;
+use function var_dump;
 
 /**
  * Class ParserStringServiceTest
@@ -93,6 +94,6 @@ class ParserStringServiceTest extends TestCase
         $data = StringsHtmlProvider::getInnerBody();
         $dives = $this->parserStringService->changeStringHtmlToArray($data);
 
-        $this->assertEquals(207, count($dives));
+        $this->assertEquals(107, count($dives));
     }
 }

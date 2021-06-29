@@ -14,10 +14,20 @@ interface ProductRepositoryInterface
     /**
      * Pobranie jednego produktu
      */
-    public function getOneByName(string $productName): Product;
+    public function getOne(int $idProduct): Product;
 
     /**
      * Dodanie produktu do repozytorium
      */
     public function add(Product $product): Product;
+
+    /**
+     * Usunięcie produktu z repozytorium
+     */
+    public function remove(Product $product): void;
+
+    /**
+     * Aktualizacja istniejącego produktu
+     */
+    public function update(Product $product): void ;
 }

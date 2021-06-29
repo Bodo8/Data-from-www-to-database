@@ -5,7 +5,7 @@ namespace Tests\Unit\Models\Entity;
 
 use App\Models\Entity\Product;
 use PHPUnit\Framework\TestCase;
-use Tests\Unit\Models\MotherObject\ProductMother;
+use Tests\MotherObject\ProductMother;
 
 /**
  * Class ProductTest
@@ -15,7 +15,7 @@ class ProductTest extends TestCase
 {
     public function test_instance_product()
     {
-        $product = ProductMother::getOneByName('zabawka');
+        $product = ProductMother::getOne();
 
         $this->assertInstanceOf(Product::class, $product);
     }
