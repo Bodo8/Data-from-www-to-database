@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\bootstrap",
+    "\\docker-compose\\nginx",
+    "\\docker-compose\\xdebug",
+    "\\public"
+  ],
+  "SelectedNode": "\\docker-compose",
+  "PreviewInSolutionExplorer": false
+}

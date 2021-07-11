@@ -94,6 +94,6 @@ class ParserStringServiceTest extends TestCase
         $data = StringsHtmlProvider::getInnerBody();
         $dives = $this->parserStringService->changeStringHtmlToArray($data);
 
-        $this->assertEquals(107, count($dives));
+        $this->assertEquals(84, count($dives));
     }
 }

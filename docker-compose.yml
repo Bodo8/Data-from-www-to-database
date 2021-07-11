@@ -11,9 +11,14 @@ services:
       dockerfile: Dockerfile
     image: parser-app
     restart: unless-stopped
+    environment:
+      DOCKER_HOST_IP: 127.0.0.1
+    extra_hosts:
+      - host.docker.internal:${DOCKER_HOST_IP}
     working_dir: /var/www/
     volumes:
       - ./:/var/www
+      - ./docker-compose/xdebug/php_docker.ini:/etc/php7/conf.d/php_docker.ini
     networks:
       - parser
 

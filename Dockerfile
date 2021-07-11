@@ -4,6 +4,7 @@ FROM php:7.4-fpm
 ARG user
 ARG uid
 
+
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
@@ -26,6 +27,12 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN useradd -G www-data,root -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
+
+## xdebug 3
+COPY ./docker-compose/xdebug/php_docker.ini /etc/php7.4/conf.d/
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+   
 
 # Set working directory
 WORKDIR /var/www

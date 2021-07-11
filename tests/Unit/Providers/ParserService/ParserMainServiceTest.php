@@ -28,11 +28,11 @@ class ParserMainServiceTest extends TestCase
         $innerBody = StringsHtmlProvider::getInnerBody();
         $cleanData = $parserMainService->cleanHtmlStringsFromBadTags($innerBody);
 
-        $this->assertEquals(109, count($cleanData));
+        $this->assertEquals(6, count($cleanData));
         $this->assertEquals(
-            110, $this->searchOneBadWord($cleanData, $wordToRemove, $startNumber));
+            7, $this->searchOneBadWord($cleanData, $wordToRemove, $startNumber));
         $this->assertEquals(
-            21, $this->searchOneBadWord($cleanData, $existedWord, $startNumber));
+            1, $this->searchOneBadWord($cleanData, $existedWord, $startNumber));
     }
 
     /**

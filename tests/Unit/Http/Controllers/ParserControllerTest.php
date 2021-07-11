@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Http\Controllers;
 
-use App\Http\Controllers\ParserController;
-use App\Providers\ParserServiceProvider;
-use App\Providers\UrlServiceProvider;
+use App\Providers\ParserService\UrlServiceProvider;
 use DOMNode;
 use Illuminate\Foundation\Testing\TestCase;
 use Tests\CreatesApplication;
+use App\Http\Controllers\Parser\ParserController;
+use App\Providers\ParserService\ParserServiceProvider;
 
 /**
  * Class ParserControllerTest
@@ -22,7 +22,7 @@ class ParserControllerTest extends TestCase
     {
         $provider = new UrlServiceProvider();
         $parserProvider = $this->createMock(ParserServiceProvider::class);
-        $parserController = new ParserController($provider, $parserProvider);
+        $parserController = new ParserController ($provider, $parserProvider);
         $data = $parserController->getData();
 
        $this->assertInstanceOf(DOMNode::class, $data);
