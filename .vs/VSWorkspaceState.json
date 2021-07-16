@@ -2,10 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\bootstrap",
-    "\\docker-compose\\nginx",
-    "\\docker-compose\\xdebug",
-    "\\public"
+    "\\public",
+    "\\tests",
+    "\\tests\\Feature",
+    "\\tests\\Feature\\Http",
+    "\\tests\\Feature\\Http\\Controllers",
+    "\\tests\\Feature\\Http\\Controllers\\Product"
   ],
-  "SelectedNode": "\\docker-compose",
   "PreviewInSolutionExplorer": false
 }

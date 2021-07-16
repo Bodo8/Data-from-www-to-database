@@ -49,8 +49,8 @@ class ProductControllerTest extends \Illuminate\Foundation\Testing\TestCase
         $validator->shouldReceive('validated')
                 ->once()
                 ->andReturn([
-                'name' => 'Sara',
-                'price' => '10',
+                'name' => 'Domek',
+                'price' => '25',
                 'availability' => 'well'
                 ]);
 
